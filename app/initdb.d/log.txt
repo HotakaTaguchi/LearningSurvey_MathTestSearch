@@ -1,0 +1,5 @@
+「DB Browser for SQLite」により、dbファイルをGUI操作で生成しました。
+
+「DB Browser for SQLite」により、sqlファイルをエクスポートしました。
+
+・Powered by DigitalOcean.　DB Browser for SQLite (https://sqlitebrowser.org/).

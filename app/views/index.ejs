@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/index.css" />    
+  <title>全国学力・学習状況調査　算数テスト検索</title>
+</head>
+<body>
+<%
+function year_table(year) {
+  switch (year) {
+    case 2007:
+      return '平成19年';
+    case 2008:
+      return '平成20年';
+    case 2009:
+      return '平成21年';
+    case 2010:
+      return '平成22年';
+    case 2011:
+      return '平成23年';
+    case 2012:
+      return '平成24年';
+    case 2013:
+      return '平成25年';
+    case 2014:
+      return '平成26年';
+    case 2015:
+      return '平成27年';
+    case 2016:
+      return '平成28年';
+    case 2017:
+      return '平成29年';
+    case 2018:
+      return '平成30年';
+    case 2019:
+      return '令和元年';
+    case 2020:
+      return '令和2年';
+    case 2021:
+      return '令和3年';
+    case 2022:
+      return '令和4年';
+    default:
+      return '-';
+  }
+}
+%>
+<header><h2>全国学力・学習状況調査　算数テスト検索</h2></header>
+<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="./">
+        <span itemprop="name">ホーム</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </li>
+
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item">
+        <span itemprop="name">検索</span>
+    </a>
+    <meta itemprop="position" content="2" />
+  </li>
+</ol>
+<section id="search">
+  <%
+  if(typeof record == 'undefined'){
+    var record ={name:'',year:'0',year_op: '1',subject: '0',correct_rate1: '0',correct_rate2: '100',grade: '0',field: '0',category: '0' };
+  }
+  %>
+
+  <form action="search" method="get" class="form" name="form">
+    <table border="1" style="border-collapse: collapse">
+      <tr>
+        <th>
+          <label for="keyward">キーワード：</label>
+          <input type="text" name="name" id="keyward">
+          <div id="submit" style="display:inline;">
+            <button  type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </th>
+      </tr>
+    </table>
+    <div id="detail">
+      <button id="detail" type="button">⊞ 詳細</button>
+    </div>
+    <div id="search_box">
+      <table border="1" id="detail_form">
+        <tr>
+          <th>
+            <label for="year">年度：</label>
+            <select name="year">
+              <option value="0">----</option>
+              <option value="2007">平成19</option>
+              <option value="2008">平成20</option>
+              <option value="2009">平成21</option>
+              <option value="2010">平成22</option>
+              <option value="2011">平成23</option>
+              <option value="2012">平成24</option>
+              <option value="2013">平成25</option>
+              <option value="2014">平成26</option>
+              <option value="2015">平成27</option>
+              <option value="2016">平成28</option>
+              <option value="2017">平成29</option>
+              <option value="2018">平成30</option>
+              <option value="2019">令和元</option>
+              <option value="2020">令和2</option>
+              <option value="2021">令和3</option>
+              <option value="2022">令和4</option>
+            </select>
+            年度
+            <select name="year_op">
+              <option value="1">のみ</option>
+              <option value="2">以前</option>
+              <option value="3">以降</option>
+            </select>
+          </th>
+          <th>
+            <label for="subject">A/B：</label>
+            <select name="subject">
+              <option value="0">----</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+          </th>
+          <th>
+            <label for="correct_rate">正答率：</label>
+            <input type="number" max="100" min="0" name="correct_rate1" value="0" onkeyup="return check1()">以上
+            <input type="number" max="100" min="0" name="correct_rate2" value="100" onkeyup="return check2()">未満
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <label for="grade">学年：</label>
+            <select name="grade">
+              <option value="0">----</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+            年
+          </th>
+          <th>
+            <label for="field">領域：</label>
+            <select name="field">
+              <option value="0">----</option>
+              <option value="1">A 数と計算</option>
+              <option value="2">B 図形</option>
+              <option value="3">旧B 量と測定</option>
+              <option value="4">旧C 図形</option>
+              <option value="5">C 測定</option>
+              <option value="6">C 変化と関係</option>
+              <option value="7">D データの活用</option>
+              <option value="8">旧D 数量関係</option>
+            </select>
+          </th>
+          <th>
+            <label for="category">解答形式：</label>
+            <select name="category">
+              <option value="0">----</option>
+              <option value="1">選択式</option>
+              <option value="2">短答式</option>
+              <option value="3">記述式</option>
+            </select>
+          </th>
+      </tr>
+      </table>
+      <div id="submit">
+        <button  type="submit">詳細検索</button>
+      </div>
+    </div>
+  </form>
+  <form id="sort" action="search" method="get">
+    <input type="hidden" name="name" value=<%=record.name%>>
+    <input type="hidden" name="year" value=<%=record.year%>>
+    <input type="hidden" name="year_op" value=<%=record.year_op%>>
+    <input type="hidden" name="subject" value=<%=record.subject%>>
+    <input type="hidden" name="correct_rate1" value=<%=record.correct_rate1%>>
+    <input type="hidden" name="correct_rate2" value=<%=record.correct_rate2%>>
+    <input type="hidden" name="grade" value=<%=record.grade%>>
+    <input type="hidden" name="field" value=<%=record.field%>>
+    <input type="hidden" name="category" value=<%=record.category%>>
+    <select name="sort">
+    <option value="0">---</option>
+    <option value="1">年度が新しい順</option>
+    <option value="2">年度が古い順</option>
+    <option value="3">正答率が高い順</option>
+    <option value="4">正答率が低い順</option>
+    </select>
+  </form>
+</section>
+
+
+
+<table border="1" style="border-collapse: collapse">
+<tr>
+  <th>　年度　</th>
+  <th>A/B</th>
+  <th>大問</th>
+  <th>小問</th>
+  <th>　　　　　　　問題　　　　　　　</th>
+  <th>正答率</th>
+  <th>問題詳細(外部リンク)</th>
+</tr>
+<% 
+if(typeof result !== 'undefined') {
+  if(result.length){
+result.forEach((value,index,array) => {
+if(value.category_id!=4){  %>
+<tr>
+<td align="center"><%= year_table(value.year) %></td>
+<%
+if(!value.subjects){
+  var subjects="-";
+}else{
+  var subjects=value.subjects;
+}
+%>
+<td align="center"><%= subjects %></td>
+<td align="right"><%= value.part_no %></td>
+<% if(value.question_no == 0){ 
+  value.question_no = "-"
+}  %>
+<td align="right"><%= value.question_no %></td>
+<td align="center">
+<%
+value.sentence= value.sentence.replace(/{image(\d+)}/,"(画像)");
+var sentence = value.sentence;
+if(value.sentence.length>15){
+sentence=value.sentence.substr( 0, 15 );
+sentence +="...";
+}
+%>
+<%= sentence %></td>
+<%
+if(!value.correct_rate){
+  var correct_rate="-";
+}else{
+  var correct_rate=value.correct_rate.toFixed(1);
+}
+%>
+<td align="right"><%= correct_rate %></td>
+<td align="center">
+  <form id="result" method="get" name="form1" action="result" style="display: inline">
+    <input type="hidden" name="id" value=<%= value.question_id %>>
+    <input type="hidden" name="name" value=<%=record.name%>>
+    <input type="hidden" name="year" value=<%=record.year%>>
+    <input type="hidden" name="year_op" value=<%=record.year_op%>>
+    <input type="hidden" name="subject" value=<%=record.subject%>>
+    <input type="hidden" name="correct_rate1" value=<%=record.correct_rate1%>>
+    <input type="hidden" name="correct_rate2" value=<%=record.correct_rate2%>>
+    <input type="hidden" name="grade" value=<%=record.grade%>>
+    <input type="hidden" name="field" value=<%=record.field%>>
+    <input type="hidden" name="category" value=<%=record.category%>>
+    <button id="detail" type="submit">詳細</button>
+  </form> (<a id="pdf" href="<%= value.url %>"><i class="fas fa-file-pdf"></i></a>)</td>
+</tr>
+<% }})
+}else{
+%>
+<tr><td colspan="7" align="center">条件に一致する問題は見つかりませんでした</td></tr>
+<%}}%>
+</table>
+
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</body>
+</html>

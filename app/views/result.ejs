@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/result.css" />
+  <title>全国学力・学習状況調査　算数テスト検索</title>
+</head>
+<body>
+<%
+function year_table(year) {
+  switch (year) {
+    case 2007:
+      return '平成19年';
+    case 2008:
+      return '平成20年';
+    case 2009:
+      return '平成21年';
+    case 2010:
+      return '平成22年';
+    case 2011:
+      return '平成23年';
+    case 2012:
+      return '平成24年';
+    case 2013:
+      return '平成25年';
+    case 2014:
+      return '平成26年';
+    case 2015:
+      return '平成27年';
+    case 2016:
+      return '平成28年';
+    case 2017:
+      return '平成29年';
+    case 2018:
+      return '平成30年';
+    case 2019:
+      return '令和元年';
+    case 2020:
+      return '令和2年';
+    case 2021:
+      return '令和3年';
+    case 2022:
+      return '令和4年';
+    default:
+      return '-';
+  }
+}
+%>
+<header><h2>全国学力・学習状況調査　算数テスト検索</h2></header>
+<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="./">
+        <span itemprop="name">ホーム</span>
+    </a>
+    <meta itemprop="position" content="1" />
+  </li>
+
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item" href="search?name=<%=record.name%>&year=<%=record.year%>&year_op=<%=record.year_op%>&subject=<%=record.subject%>&correct_rate1=<%=record.correct_rate1%>&correct_rate2=<%=record.correct_rate2%>&grade=<%=record.grade%>&field=<%=record.field%>&category=<%=record.category%>">
+        <span itemprop="name">検索</span>
+    </a>
+    <meta itemprop="position" content="2" />
+  </li>
+
+  <li itemprop="itemListElement" itemscope
+      itemtype="https://schema.org/ListItem">
+    <a itemprop="item">
+        <span itemprop="name">検索結果</span>
+    </a>
+    <meta itemprop="position" content="3" />
+  </li>
+</ol>
+<section id="search">
+<%
+if(!result.subjects){
+  var subjects="";
+}else{
+  var subjects=result.subjects;
+}
+if(result.question_no == 0){ 
+  var question_no = ""
+}else{
+  question_no="("+result.question_no+")";
+}
+image1.forEach((value,index,array) => {
+  result.sentence = result.sentence.replace(/{image(\d+)}/,"<br><img src=\"images/" + value.image + "\" ><br>");
+});
+result.sentence = result.sentence.replace(/\r?\n/g,"");
+
+image2.forEach((value,index,array) => {
+  problem.sentence = problem.sentence.replace(/{image(\d+)}/,"<br><img src=\"images/" + value.image + "\" ><br>");
+});
+problem.sentence = problem.sentence.replace(/\r?\n/g,"");
+if(result.question_no == 0){
+  problem.sentence= "";
+}
+%>
+<%=year_table(result.year)%>度　算数<%=subjects%> 
+<div id="problem">
+<br><SPAN><%=result.part_no%></SPAN><b>　<%-problem.sentence%></b>
+<br> <%=question_no%><b>　<%-result.sentence%></b>
+<%answer.forEach((value,index,array) => {
+if(value.selection_pro=="1"){
+%>
+<br><%= value.selection_no %>.　<%= value.selection_sen %>
+<%}%>
+
+<%})%>
+
+<br><div id="back"><a id="back" href="search?name=<%=record.name%>&year=<%=record.year%>&year_op=<%=record.year_op%>&subject=<%=record.subject%>&correct_rate1=<%=record.correct_rate1%>&correct_rate2=<%=record.correct_rate2%>&grade=<%=record.grade%>&field=<%=record.field%>&category=<%=record.category%>">検索にもどる</a></div>
+<div id="detail"><button id="detail" type="button">⊞ 解答類型</button></div>
+<div id="search_box">
+  <table border="1" style="border-collapse: collapse">
+    <tr>
+      <th>型番</th>
+      <th>解答類型</th>
+      <th>選択率</th>
+      <th>正答</th>
+    </tr>
+    <tr>
+  <%
+  answer.forEach((value,index,array) => {
+  %>
+  <td align="left"><%= value.type_no %></td><td align="left"><%= value.answer %></td>
+<%
+var select_rate=value.select_rate.toFixed(1);
+%>
+  <td align="left"><%= select_rate %>  ％</td>
+  <td align="center">
+  <%if(value.correct=="1"){%>
+    〇
+  <%}%>
+  </td></tr>
+  <%})%>
+  </table>
+  ※一部表示されていない項目があります。この問題の解答類型全てを閲覧したい場合は<a href=<%=answer[0].url%> id="url">こちら</a>
+</div>
+
+
+</section>
+
+
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="js/result.js"></script>
+
+</body>
+</html>

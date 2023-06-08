@@ -1,0 +1,20 @@
+version: '3.7'
+
+
+
+services:
+  search:
+    build:
+      context: ./app
+      target: development
+    command: npx nodemon index.js
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./app/initdb.d:/docker-entrypoint-initdb.d
+      - ./app:/srv/search
+      - search_node_modules:/srv/search/node_modules
+
+volumes:
+  search_node_modules:
+  problemdb:

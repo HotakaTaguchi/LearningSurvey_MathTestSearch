@@ -1,0 +1,183 @@
+body {
+    font: 3vh Helvetica, Arial;
+    text-align: center;
+    vertical-align: middle;
+    background: linear-gradient(#a5a3a3, #ffffff);
+    font-weight: normal;
+  }
+  *,
+  *:before,
+  *:after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+  
+  html {
+    display: table;
+    width: 100%;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 62.5%;
+  }
+  
+  a.btn{
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-radius: 0.5rem;
+  }
+  
+  a.btn-border {
+    margin-bottom: 12px;
+    padding: 0;
+  
+    -webkit-transition: all 0.3s;
+  
+    transition: all 0.3s;
+  
+    border-radius: 0;
+  }
+  
+  a.btn-border span {
+    position: relative;
+  
+    display: block;
+  
+    padding: 1.25rem 3rem;
+  
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 0.5rem;
+    background: #fff;
+  }
+  
+  a.btn-border:before {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+  
+    display: block;
+  
+    width: 100%;
+    height: 14px;
+  
+    content: "";
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  
+    border: 2px solid #000;
+    border-top: 1px solid #000;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-image: -webkit-repeating-linear-gradient(
+      135deg,
+      #000,
+      #000 1px,
+      transparent 2px,
+      transparent 5px
+    );
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #000,
+      #000 1px,
+      transparent 2px,
+      transparent 5px
+    );
+    background-size: 7px 7px;
+  
+    -webkit-backface-visibility: hidden;
+  
+    backface-visibility: hidden;
+  }
+  
+  a.btn-border:hover {
+    -webkit-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+  }
+  
+  a.btn-border:hover:before {
+    bottom: -5px;
+  }
+  
+  a.btn-border:active {
+    -webkit-transform: translate(0, 7px);
+    transform: translate(0, 7px);
+  }
+  
+  a.btn-border:active:before {
+    bottom: -1px;
+  }
+  
+  h2 {
+    font: 8vh Helvetica, Arial;
+    padding-top:70px;
+  }
+  
+  .name{
+    padding: 0px 2px 40px 2px;
+  }
+  .breadcrumb {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .breadcrumb li {
+    display: inline;/*横に並ぶように*/
+    list-style: none;
+    font-weight: bold;/*太字*/
+  }
+  
+  .breadcrumb li:after {/* >を表示*/
+    content: '>';
+    padding: 0 0.2em;
+    color: #555;
+  }
+  
+  .breadcrumb li:last-child:after {
+    content: '';
+  }
+  
+  .breadcrumb li a {
+    text-decoration: none;
+    color: #6d6d6d;/*色*/
+  }
+  
+  .breadcrumb li a:hover {
+    text-decoration: underline;
+  }
+  
+  header{
+    text-align: left;
+    display: block;
+    padding: 0px 10px;
+  }
+  .box1{
+    float: left;
+  }
+  .box2{
+    float: right;
+  }
+  .box2 a{
+    font: 3vh Helvetica, Arial;
+    font-weight: normal;
+    color: #5c51f3;/*色*/
+  }
+  .boxContainer{
+    overflow: hidden;
+  }

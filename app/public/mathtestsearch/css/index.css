@@ -1,0 +1,57 @@
+header{ background: #e6eaf2;  padding: 10px;}
+body { font: 17px Helvetica, Arial; color:#666; font-size: 3vh; font-weight: normal;
+  font-style: normal; text-align: left;  margin: 5 auto; } 
+#search label {  font-weight: bold; vertical-align: middle;}
+#search form { padding: 0px; display: inline;}
+#submit {display:inline-block; padding-bottom: 20px;}
+#submit button { background: #e68908;  border: none;  color:white;  cursor:pointer; font-size: 3vh; padding:3px 6px;border-radius:5px;}
+#submit button:hover { background: gold;}
+#search {margin:3px 0px; }
+#search th { padding: 10px;}
+#detail button { background: white; border: none;  color:#666;  cursor:pointer; font-size: 3vh; padding:3px 6px;}
+#result button { background: white; border: none;  color:#e68908;  cursor:pointer; font-size: 3vh; padding:3px 6px;}
+#result button:hover { 
+  color: gold;
+  text-decoration: underline;
+}
+#search_box {display:none;}
+#pdf {color:black}
+#detail_form{ border-collapse: collapse; margin:5px;}
+input{font-size: 3vh;}
+select{font-size: 3vh;}
+.pagenation li {display: inline-block; height:7vh;line-height:7vh; width:7vh;text-align:center; border:1px #ccc solid;color:#666;   border-radius: 5px / 5px;}
+.pagenation .this {background-color:#777;color:#fff;}
+.pagenation .pre {background-color:#ccc;color:#333;}
+.pagenation li a{display:block;text-decoration: none; color:#666;}
+.pagenation li a:hover {color: #fff;text-decoration: none;background-color: #003396; border-radius: 5px / 5px;}
+.breadcrumb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb li {
+  display: inline;/*横に並ぶように*/
+  list-style: none;
+  font-weight: bold;/*太字*/
+}
+
+.breadcrumb li:after {/* >を表示*/
+  content: '>';
+  padding: 0 0.2em;
+  color: #555;
+}
+
+.breadcrumb li:last-child:after {
+  content: '';
+}
+
+.breadcrumb li a {
+  text-decoration: none;
+  color: #665642;/*色*/
+}
+
+.breadcrumb li a:hover {
+  text-decoration: underline;
+}
+
